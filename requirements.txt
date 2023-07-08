@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+aiofiles==23.1.0
+pydantic==1.10.9
+sqlalchemy
+email-validator
+python-jose
+passlib
+bcrypt
+python-multipart
+python-jose[cryptography]
+
