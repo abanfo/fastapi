@@ -38,10 +38,10 @@ from auth.aouth2 import get_current_user
 #         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f'post with id {id} doesnt exist')
 #     return updated_post
 
-def get_all(db: Session):
-    return db.query(Post).all()
+def get_all(db: Session, limit: int):
+    return db.query(Post).limit(limit=limit).all()
 
-def create(db:Session,request: PostCreate):
+def create(db:Session,request: PostCreate, owner_id: int):
     new_post = Post(
         **request.dict()
     )
@@ -74,7 +74,7 @@ def update_post(id: int, request: PostCreate,db:Session, user_id: int):
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f'post with id {id} doesnt exist')
     if post.owner_id != user_id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f' you cant delete that doesnt belong to u')
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f'you cant delete that doesnt belong to u')
     updated_post.update(request.dict(),synchronize_session=False)
     db.commit()
 

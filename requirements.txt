@@ -9,4 +9,6 @@ passlib
 bcrypt
 python-multipart
 python-jose[cryptography]
-
+pydantic[dotenv]
+pydantic-settings
+fastapi[all]

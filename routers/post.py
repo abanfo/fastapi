@@ -12,14 +12,14 @@ router = APIRouter(
     tags=['post']
 )
 @router.get('/all', response_model= List[PostDisplay])
-def get_all(db:Session=Depends(get_db),current_user: int = Depends(get_current_user)):
-    return db_post.get_all(db=db)
+def get_all(db:Session=Depends(get_db),current_user: int = Depends(get_current_user), limit:int=4):
+    return db_post.get_all(db=db, limit=limit)
 @router.get('/{id}')
 def get_post(id:int,db:Session=Depends(get_db),current_user: int = Depends(get_current_user)):
     return db_post.get_post(id=id,db=db)
 @router.post('/create', response_model=PostDisplay)
 def create(request: PostCreate,db: Session=Depends(get_db), current_user: int = Depends(get_current_user)):
-    return db_post.create(db=db,request=request)
+    return db_post.create(db=db,request=request, owner_id=current_user.id )
 @router.delete('/delete/{id}')
 def delete_post(id: int, db:Session=Depends(get_db),current_user: int = Depends(get_current_user)):
     return db_post.delete(id=id,db=db, user_id=current_user.id)
