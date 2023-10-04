@@ -20,4 +20,4 @@ app.include_router(vote.router)
 # def get():
 #     return db_post.get_all()
 
-model.Base.metadata.create_all(bind=engine)
+# model.Base.metadata.create_all(bind=engine) 
