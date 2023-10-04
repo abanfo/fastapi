@@ -12,7 +12,7 @@ router = APIRouter(
     tags=['post']
 )
 @router.get('/all', response_model= List[PostDisplay])
-def get_all(db:Session=Depends(get_db),current_user: int = Depends(get_current_user), limit:int=4):
+def get_alldb_(db:Session=Depends(get_db),current_user: int = Depends(get_current_user), limit:int=4):
     return db_post.get_all(db=db, limit=limit)
 @router.get('/{id}')
 def get_post(id:int,db:Session=Depends(get_db),current_user: int = Depends(get_current_user)):
